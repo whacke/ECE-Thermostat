@@ -22,17 +22,20 @@ void loop() {
   String stateToString;
   if (millis() - timer >= INTERVAL)     // if 500 milliseconds, compute voltage and temperature
   {
-    float lastTemp = tempGoal;
+    
     measured = 1.1 * analogRead(0) / 10.24;
     updateTemp(tempGoal, measured);
     switch(state)
     {
       case STANDBY:
         stateToString = "STANDBY";
+        break;
       case HEATING:
         stateToString = "HEATING";
+        break;
       case COOLING:
-        stateToString = "COOLING";     
+        stateToString = "COOLING";  
+        break;   
     }
 
     tempGoal = (encoderPosition / 16.0) + 70;
