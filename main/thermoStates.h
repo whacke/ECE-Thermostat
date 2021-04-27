@@ -4,9 +4,8 @@
 enum SMStates { STANDBY, HEATING, COOLING };
 SMStates state = STANDBY;
 
-float updateTemp(float tempGoal)
+SMStates updateTemp(float tempGoal, float measuredTemp)
 {
-  float measuredTemp = default; //could make this part of the method if we only want input in main
   switch(state)
   {
     case STANDBY:
