@@ -48,7 +48,7 @@ void UpdateClock()
 // Send Hours, Minutes and Seconds to a display.
 void SendClock()
 {
-  LcdDriver.print(" ");
+  //LcdDriver.print(" ");
   // Check if leading zero needs to be sent
   if (CLK_Hours < 10)
   {
@@ -74,13 +74,13 @@ void SendClock()
     case CLOCK_RUNNING:
       break;
     case CLOCK_SET_HOURS: //from hours
-      LcdDriver.setCursor(2, 0); //go to hours
+      LcdDriver.setCursor(1, 0); //go to hours
       break;
     case CLOCK_SET_MINUTES: //from minutes
-      LcdDriver.setCursor(4, 0); //go to minutes
+      LcdDriver.setCursor(3, 0); //go to minutes
       break;
     case CLOCK_SET_SECONDS: //from seconds
-      LcdDriver.setCursor(6, 0); //go to seconds
+      LcdDriver.setCursor(5, 0); //go to seconds
       break;  
   }
   LcdDriver.cursor();
