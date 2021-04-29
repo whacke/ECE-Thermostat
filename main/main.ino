@@ -41,9 +41,10 @@ void loop() {
     tempGoal = (encoderPosition / 16.0) + 70;
     LcdDriver.clear();
     LcdDriver.print(stateToString);
-    LcdDriver.print("   ");
-    LcdDriver.print(measured);
+    
     LcdDriver.setCursor(0, 1);
+    LcdDriver.print(measured);
+    LcdDriver.print("--->");
     LcdDriver.print(tempGoal);
     LcdDriver.setCursor(0, 0);
     timer += INTERVAL;    
