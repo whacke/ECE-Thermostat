@@ -32,11 +32,29 @@ void loop() {
   // put your main code here, to run repeatedly:
   float measured;// Check time
   String stateToString;
-  if (millis() - timer >= INTERVAL)     // if 500 milliseconds, compute voltage and temperature
+
+
+  switch(ButtonNextState(digitalRead(4))) //Using button state machine
+    {
+      case 2:
+        IncreaseClock(); //on a short press, incement clock values
+        LcdDriver.clear();
+        SendClock();
+        break;
+  
+      case 3:
+        MoveClockState(); //on long press, chang the clock state
+        LcdDriver.clear();
+        SendClock();
+        break;
+    }
+  
+  if (millis() - timer >= INTERVAL)     // if 1000 milliseconds, compute voltage and temperature
   {
     if(clockState == CLOCK_RUNNING)
       UpdateClock(); //update clock for screen
     LcdDriver.clear(); //clear screen
+    LcdDriver.setCursor(0, 0);
     SendClock(); //print clock values
     
     measured = 1.1 * analogRead(0) / 10.24;
@@ -60,18 +78,6 @@ void loop() {
         break;   
     }
 
-    switch(ButtonNextState(digitalRead(4))) //Using button state machine
-    {
-      case 2:
-        IncreaseClock(); //on a short press, incement clock values
-        SendClock();
-        break;
-  
-      case 3:
-        MoveClockState(); //on long press, chang the clock state
-        SendClock();
-        break;
-    }
 
     tempGoal = (encoderPosition / 16.0) + 70;
     if(encoderPosition != lastEncoder)
@@ -81,6 +87,7 @@ void loop() {
     
     //LcdDriver.clear();
     //SendClock();
+    LcdDriver.setCursor(8, 0);
     LcdDriver.print(stateToString);
     
     LcdDriver.setCursor(0, 1);
