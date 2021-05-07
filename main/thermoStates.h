@@ -26,7 +26,7 @@ SMStates updateTemp(float tempGoal, float measuredTemp) //state machine
       }
       break;
 
-    case COOLING: ..case heating
+    case COOLING: //case heating
       if(measuredTemp <= tempGoal) //if measured temp < temperature goal
       {
         state = STANDBY; //set to standby
