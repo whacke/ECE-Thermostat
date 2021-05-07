@@ -1,43 +1,35 @@
 #ifndef thermoStates_H
 #define thermoStates_H
 
-enum SMStates { STANDBY, HEATING, COOLING };
+enum SMStates { STANDBY, HEATING, COOLING }; //state enumerator
 SMStates state = STANDBY;
 
-SMStates updateTemp(float tempGoal, float measuredTemp)
+SMStates updateTemp(float tempGoal, float measuredTemp) //state machine
 {
   switch(state)
   {
-    case STANDBY:
-      if(measuredTemp > tempGoal + 5)
+    case STANDBY: //case standby
+      if(measuredTemp > tempGoal + 5) //if measured temp > tempGoal by 5
       {
-        state = COOLING;
+        state = COOLING; //set state to cooling
       }
-      else if(measuredTemp < tempGoal - 5)
+      else if(measuredTemp < tempGoal - 5) //if measured temp < tempGoal by 5
       {
-        state = HEATING;
-      }
-      break;
-
-    case HEATING:
-      if(measuredTemp >= tempGoal)
-      {
-        state = STANDBY;
-      }
-      else
-      {
-        //do whatever we do when heating
+        state = HEATING; //set state to heating
       }
       break;
 
-    case COOLING:
-      if(measuredTemp <= tempGoal)
+    case HEATING: //case heating
+      if(measuredTemp >= tempGoal) //if measured temp > temperature goal
       {
-        state = STANDBY;
+        state = STANDBY; //set to standby
       }
-      else
+      break;
+
+    case COOLING: ..case heating
+      if(measuredTemp <= tempGoal) //if measured temp < temperature goal
       {
-        //do whatever we do when cooling
+        state = STANDBY; //set to standby
       }
       break;
   }
